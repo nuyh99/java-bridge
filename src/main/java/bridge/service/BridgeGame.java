@@ -41,10 +41,13 @@ public class BridgeGame {
     }
 
     public boolean isGameOver() {
-        return user.isAnswerCorrect(bridge.getAnswer());
+        return !user.isAnswerCorrect(bridge.getAnswer());
     }
 
     public boolean isGameWin() {
+        if(!user.isAnswerCorrect(bridge.getAnswer()))
+            return false;
+
         return user.getInputs().size() == bridge.getAnswer().size();
     }
 
