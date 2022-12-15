@@ -2,6 +2,7 @@ package bridge.service;
 
 import bridge.BridgeNumberGenerator;
 import bridge.domain.Bridge;
+import bridge.domain.User;
 
 import java.util.stream.IntStream;
 
@@ -11,10 +12,12 @@ import java.util.stream.IntStream;
 public class BridgeGame {
     private final BridgeNumberGenerator bridgeNumberGenerator;
     private final Bridge bridge;
+    private final User user;
 
-    public BridgeGame(BridgeNumberGenerator bridgeNumberGenerator, Bridge bridge) {
+    public BridgeGame(BridgeNumberGenerator bridgeNumberGenerator, Bridge bridge, User user) {
         this.bridgeNumberGenerator = bridgeNumberGenerator;
         this.bridge = bridge;
+        this.user = user;
     }
 
     /**
@@ -30,7 +33,8 @@ public class BridgeGame {
      * <p>
      * 이동을 위해 필요한 메서드의 반환 타입(return type), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
      */
-    public void move() {
+    public void move(String input) {
+        user.move(input);
     }
 
     /**
