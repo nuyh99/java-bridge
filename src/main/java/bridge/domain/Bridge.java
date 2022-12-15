@@ -9,12 +9,28 @@ public class Bridge {
     private final List<Integer> answer = new ArrayList<>();
     private int length;
 
+    public int getLength() {
+        return length;
+    }
+
+    public List<Integer> getAnswer() {
+        return answer;
+    }
+
+    /**
+     * 도메인 로직
+     */
     public void readBridgeLength(String input) {
         int length = validateNumericValue(input);
         validateNumberRange(length);
 
         this.length = length;
     }
+
+    public void makeBridge(int bridge) {
+        answer.add(bridge);
+    }
+
 
     private int validateNumericValue(String input) {
         try {
