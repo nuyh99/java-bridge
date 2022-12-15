@@ -1,22 +1,23 @@
 package bridge.service;
 
-import bridge.BridgeNumberGenerator;
+import bridge.BridgeMaker;
 import bridge.domain.Bridge;
+import bridge.domain.Command;
 import bridge.domain.User;
 
-import java.util.stream.IntStream;
+import java.util.List;
 
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
 public class BridgeGame {
-    private final BridgeNumberGenerator bridgeNumberGenerator;
+    private final BridgeMaker bridgeMaker;
     private final Bridge bridge;
     private final User user;
     private int count=1;
 
-    public BridgeGame(BridgeNumberGenerator bridgeNumberGenerator, Bridge bridge, User user) {
-        this.bridgeNumberGenerator = bridgeNumberGenerator;
+    public BridgeGame(BridgeMaker bridgeMaker, Bridge bridge, User user) {
+        this.bridgeMaker = bridgeMaker;
         this.bridge = bridge;
         this.user = user;
     }
@@ -26,10 +27,11 @@ public class BridgeGame {
      */
     public void makeBridge(String input) {
         bridge.validateBridgeLength(input);
-        int length = Integer.parseInt(input);
+        List<String> bridge = bridgeMaker.makeBridge(Integer.parseInt(input));
 
-        IntStream.range(0, length)
-                .forEach(o -> bridge.makeBridge(bridgeNumberGenerator.generate()));
+        bridge.stream()
+                .map(o->Command.getMove(o).getCommand())
+                .forEach(this.bridge::makeBridge);
     }
 
     /**
@@ -46,10 +48,8 @@ public class BridgeGame {
     }
 
     public boolean isGameWin() {
-        if(!user.isAnswerCorrect(bridge.getAnswer()))
-            return false;
-
-        return user.getInputs().size() == bridge.getAnswer().size();
+        return !isGameOver() &&
+                user.getInputs().size() == bridge.getAnswer().size();
     }
 
     /**
@@ -58,11 +58,20 @@ public class BridgeGame {
      * 재시작을 위해 필요한 메서드의 반환 타입(return type), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
      */
     public boolean retry(String input) {
-        if(!user.retry(input))
-            return false;
+        if(user.retry(input)){
+            init();
+            return true;
+        }
 
-        init();
-        return true;
+        return false;
+    }
+
+    public int getCount() {
+        return count;
+    }
+
+    public List<Integer> getUserInputs() {
+        return user.getInputs();
     }
 
     private void init() {

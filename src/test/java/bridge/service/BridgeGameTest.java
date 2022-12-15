@@ -1,5 +1,6 @@
 package bridge.service;
 
+import bridge.BridgeMaker;
 import bridge.BridgeRandomNumberGenerator;
 import bridge.domain.Bridge;
 import bridge.domain.User;
@@ -19,7 +20,7 @@ class BridgeGameTest {
     void setup() {
         bridge = new Bridge();
         user = new User();
-        bridgeGame=new BridgeGame(new BridgeRandomNumberGenerator(), bridge, user);
+        bridgeGame=new BridgeGame(new BridgeMaker(new BridgeRandomNumberGenerator()), bridge, user);
     }
 
     @Test

@@ -30,4 +30,29 @@ class UserTest {
         Assertions.assertThatThrownBy(() -> user.move(input))
                 .isInstanceOf(IllegalArgumentException.class);
     }
+
+    @ValueSource(strings = {"R", "Q"})
+    @ParameterizedTest
+    void 재시작_입력받기(String input) throws Exception{
+        //given
+        User user = new User();
+
+        //when
+        user.retry(input);
+
+        //then
+    }
+
+    @ValueSource(strings = {"Ud", "D", "1", "faksljfle"})
+    @ParameterizedTest
+    void 잘못된_재시작(String input) throws Exception{
+        //given
+        User user = new User();
+
+        //when
+
+        //then
+        Assertions.assertThatThrownBy(() -> user.retry(input))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
 }
