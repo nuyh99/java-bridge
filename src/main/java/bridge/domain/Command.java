@@ -19,7 +19,7 @@ public enum Command {
 
     public static Command validateInput(String input) {
         return Arrays.stream(Command.values())
-                .filter(o -> o.message.equals(UP.message) || o.message.equals(DOWN.message))
+                .filter(o -> input.equals(UP.message) || input.equals(DOWN.message))
                 .findFirst()
                 .orElseThrow(()->new IllegalArgumentException(InputException.INVALID_MOVE.getMessage()));
     }
