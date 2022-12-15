@@ -23,13 +23,11 @@ class BridgeGameTest {
     @Test
     void 다리_생성하기() throws Exception{
         //given
-        bridge.readBridgeLength("10");
 
         //when
-        bridgeGame.makeBridge();
+        bridgeGame.makeBridge("10");
 
         //then
-        assertThat(bridge.getLength()).isEqualTo(10);
         assertThat(bridge.getAnswer().size()).isEqualTo(10);
         assertThat(bridge.getAnswer()).allMatch(o -> o == 0 || o == 1);
     }

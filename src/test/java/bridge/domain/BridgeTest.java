@@ -12,7 +12,7 @@ class BridgeTest {
         Bridge bridge = new Bridge();
 
         //when
-        bridge.readBridgeLength(input);
+        bridge.validateBridgeLength(input);
 
         //then
     }

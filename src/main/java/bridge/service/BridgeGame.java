@@ -23,8 +23,11 @@ public class BridgeGame {
     /**
      * 도메인 로직
      */
-    public void makeBridge() {
-        IntStream.range(0, bridge.getLength())
+    public void makeBridge(String input) {
+        bridge.validateBridgeLength(input);
+        int length = Integer.parseInt(input);
+
+        IntStream.range(0, length)
                 .forEach(o -> bridge.makeBridge(bridgeNumberGenerator.generate()));
     }
 
@@ -35,6 +38,14 @@ public class BridgeGame {
      */
     public void move(String input) {
         user.move(input);
+    }
+
+    public boolean isGameOver() {
+        return user.isAnswerCorrect(bridge.getAnswer());
+    }
+
+    public boolean isGameWin() {
+        return user.getInputs().size() == bridge.getAnswer().size();
     }
 
     /**

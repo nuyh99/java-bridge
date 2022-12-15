@@ -7,11 +7,6 @@ import java.util.List;
 
 public class Bridge {
     private final List<Integer> answer = new ArrayList<>();
-    private int length;
-
-    public int getLength() {
-        return length;
-    }
 
     public List<Integer> getAnswer() {
         return answer;
@@ -20,11 +15,9 @@ public class Bridge {
     /**
      * 도메인 로직
      */
-    public void readBridgeLength(String input) {
-        int length = validateNumericValue(input);
-        validateNumberRange(length);
-
-        this.length = length;
+    public void validateBridgeLength(String input) {
+        validateNumericValue(input);
+        validateNumberRange(input);
     }
 
     public void makeBridge(int bridge) {
@@ -32,15 +25,16 @@ public class Bridge {
     }
 
 
-    private int validateNumericValue(String input) {
+    private void validateNumericValue(String input) {
         try {
-            return Integer.parseInt(input);
+            Integer.parseInt(input);
         } catch (NumberFormatException n) {
             throw new IllegalArgumentException(InputException.NOT_A_NUMBER.getMessage());
         }
     }
 
-    private void validateNumberRange(int number) {
+    private void validateNumberRange(String input) {
+        int number = Integer.parseInt(input);
         if(number<3 || 20<number)
             throw new IllegalArgumentException(InputException.INVALID_NUMBER_RANGE.getMessage());
     }
