@@ -16,8 +16,8 @@ public class User {
      * 도메인 로직
      */
     public void move(String input) {
-        validateMove(input);
-        inputs.add(Command.validateInput(input).getCommand());
+        validateLength(input);
+        inputs.add(Command.getMove(input).getCommand());
     }
 
     public boolean isAnswerCorrect(List<Integer> answer) {
@@ -28,7 +28,16 @@ public class User {
         return true;
     }
 
-    private void validateMove(String input) {
+    public boolean retry(String input) {
+        validateLength(input);
+        return Command.RESTART.equals(Command.getRestart(input));
+    }
+
+    public void init() {
+        inputs.clear();
+    }
+
+    private void validateLength(String input) {
         if(input.length()!=1)
             throw new IllegalArgumentException(InputException.INVALID_INPUT_LENGTH.getMessage());
     }

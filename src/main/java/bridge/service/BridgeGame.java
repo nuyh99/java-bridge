@@ -13,6 +13,7 @@ public class BridgeGame {
     private final BridgeNumberGenerator bridgeNumberGenerator;
     private final Bridge bridge;
     private final User user;
+    private int count=1;
 
     public BridgeGame(BridgeNumberGenerator bridgeNumberGenerator, Bridge bridge, User user) {
         this.bridgeNumberGenerator = bridgeNumberGenerator;
@@ -56,6 +57,16 @@ public class BridgeGame {
      * <p>
      * 재시작을 위해 필요한 메서드의 반환 타입(return type), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
      */
-    public void retry() {
+    public boolean retry(String input) {
+        if(!user.retry(input))
+            return false;
+
+        init();
+        return true;
+    }
+
+    private void init() {
+        user.init();
+        count++;
     }
 }

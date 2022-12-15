@@ -7,6 +7,8 @@ import java.util.Arrays;
 public enum Command {
     UP(1, "U"),
     DOWN(0, "D"),
+    RESTART(0, "R"),
+    QUIT(0, "Q"),
     ;
 
     private final int command;
@@ -17,11 +19,18 @@ public enum Command {
         this.message = message;
     }
 
-    public static Command validateInput(String input) {
+    public static Command getMove(String input) {
         return Arrays.stream(Command.values())
                 .filter(o -> input.equals(UP.message) || input.equals(DOWN.message))
                 .findFirst()
                 .orElseThrow(()->new IllegalArgumentException(InputException.INVALID_MOVE.getMessage()));
+    }
+
+    public static Command getRestart(String input) {
+        return Arrays.stream(Command.values())
+                .filter(o -> input.equals(RESTART.message) || input.equals(QUIT.message))
+                .findFirst()
+                .orElseThrow(()->new IllegalArgumentException(InputException.INVALID_RESTART.getMessage()));
     }
 
     public int getCommand() {
