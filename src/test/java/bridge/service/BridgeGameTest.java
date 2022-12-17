@@ -28,6 +28,7 @@ class BridgeGameTest {
         //given
 
         //when
+        //
         bridgeGame.makeBridge("10");
 
         //then
