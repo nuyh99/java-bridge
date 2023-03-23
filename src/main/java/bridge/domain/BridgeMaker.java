@@ -1,7 +1,9 @@
 package bridge.domain;
 
 import bridge.BridgeNumberGenerator;
+import bridge.BridgeRandomNumberGenerator;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -9,6 +11,11 @@ import java.util.List;
  */
 public class BridgeMaker {
 
+    public static final int DOWN = 0;
+    private static final int MIN_BRIDGE_SIZE = 3;
+    private static final int MAX_BRIDGE_SIZE = 20;
+    private static final String ERROR_HEAD_MESSEGE = "[ERROR] ";
+    private static final String OUT_OF_BIRDGE_SIZE_MESSEGE = "다리 크기는 3에서 20사이의 수 입니다.";
     private final BridgeNumberGenerator bridgeNumberGenerator;
 
     public BridgeMaker(BridgeNumberGenerator bridgeNumberGenerator) {
@@ -20,6 +27,30 @@ public class BridgeMaker {
      * @return 입력받은 길이에 해당하는 다리 모양. 위 칸이면 "U", 아래 칸이면 "D"로 표현해야 한다.
      */
     public List<String> makeBridge(int size) {
-        return null;
+        List<String> bridge = new ArrayList<>();
+
+        validate(size);
+
+        while (bridge.size() < size) {
+            int randomNumber = bridgeNumberGenerator.generate();
+            bridge.add(convert(randomNumber));
+        }
+
+        return bridge;
+    }
+
+    private String convert(int number){
+        String down = "D";
+        String up = "U";
+        if (number == DOWN){
+            return down;
+        }
+        return up;
+    }
+
+    public void validate(int size) {
+        if (size < MIN_BRIDGE_SIZE || size > MAX_BRIDGE_SIZE) {
+            throw new IllegalArgumentException(ERROR_HEAD_MESSEGE + OUT_OF_BIRDGE_SIZE_MESSEGE);
+        }
     }
 }
