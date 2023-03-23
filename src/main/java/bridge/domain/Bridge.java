@@ -1,2 +1,4 @@
-package bridge.domain;public class Bridge {
+package bridge.domain;
+
+public class Bridge {
 }
