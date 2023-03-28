@@ -1,28 +1,25 @@
 package bridge.view;
 
-/**
- * 사용자로부터 입력을 받는 역할을 한다.
- */
+import static camp.nextstep.edu.missionutils.Console.readLine;
+
 public class InputView {
+    public static int readBridgeSize() {
+        System.out.println("다리의 길이를 입력해주세요.");
+        try{
+            return Integer.parseInt(readLine());
 
-    /**
-     * 다리의 길이를 입력받는다.
-     */
-    public int readBridgeSize() {
-        return 0;
+        }catch (NumberFormatException e){
+            throw new IllegalArgumentException("[ERROR] 사이즈 입력 값은 숫자입니다.");
+        }
     }
 
-    /**
-     * 사용자가 이동할 칸을 입력받는다.
-     */
-    public String readMoving() {
-        return null;
+    public static String readMoving() {
+        System.out.println("이동할 칸을 선택해주세요. (위: U, 아래: D)");
+        return readLine();
     }
 
-    /**
-     * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
-     */
-    public String readGameCommand() {
-        return null;
+    public static String readGameCommand() {
+        System.out.println("게임을 다시 시도할 지 여부를 입력해주세요.(재시도: R, 종료: Q)");
+        return readLine();
     }
 }

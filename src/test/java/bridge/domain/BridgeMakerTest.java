@@ -37,14 +37,14 @@ public class BridgeMakerTest {
         BridgeNumberGenerator bridgeNumberGenerator2 = new BridgeTestNumberGenerator(1);
 
         //when
-        BridgeMaker upBridgeMaker = new BridgeMaker(bridgeNumberGenerator1);
-        BridgeMaker downBridgeMaker = new BridgeMaker(bridgeNumberGenerator2);
+        BridgeMaker BridgeMaker1 = new BridgeMaker(bridgeNumberGenerator1);
+        BridgeMaker BridgeMaker2 = new BridgeMaker(bridgeNumberGenerator2);
 
         //then
             assertAll(
-                ()-> assertThat(upBridgeMaker.makeBridge(3))
+                ()-> assertThat(BridgeMaker1.makeBridge(3))
                         .isEqualTo(Arrays.asList("D","D","D")),
-                ()-> assertThat(downBridgeMaker.makeBridge(3))
+                ()-> assertThat(BridgeMaker2.makeBridge(3))
                         .isEqualTo(Arrays.asList("U","U","U"))
         );
     }

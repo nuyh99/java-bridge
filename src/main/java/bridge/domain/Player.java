@@ -1,21 +1,20 @@
 package bridge.domain;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class Player {
     public static final String MOVABLE = "UD";
-    private List<String> record;
+    private List<String> record = new ArrayList<>();
     int tryNumber;
 
     public Player() {
-        this.tryNumber = 0;
+        this.tryNumber = 1;
     }
 
     public void makeRecord(String moving) {
-        if(!MOVABLE.contains(moving)){
-            throw new IllegalArgumentException("[Error]");
+        if (!MOVABLE.contains(moving)) {
+            throw new IllegalArgumentException("[ERROR]");
         }
         this.record.add(moving);
     }
@@ -25,15 +24,14 @@ public class Player {
     }
 
     public void resetRecord() {
-        this.record = Arrays.asList();
+        this.record = new ArrayList<>();
     }
 
     public int getTryNumber() {
-        return tryNumber;
+        return this.tryNumber;
     }
 
     public List<String> getRecord() {
-        return record;
+        return this.record;
     }
-
 }

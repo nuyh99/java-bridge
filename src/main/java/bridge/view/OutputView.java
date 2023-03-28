@@ -4,41 +4,59 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-/**
- * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
- */
 public class OutputView {
+    public static final String START_MESSEGE = "다리 건너기 게임을 시작합니다.";
+    public static final String DOWN_INITIAL = "D";
+    public static final String UP_INITIAL = "U";
+    public static final String BLANK = " ";
+    public static final String NONVALUE = "";
+    public static final String PARTITION = "|";
+    public static final String RIGHT_SIGN = "O";
+    public static final String OPEN = "[";
+    public static final String CLOSE = "]";
+    public static final int BEGIN_INDEX = 2;
+    public static final String FINAL_RESULT_MESSEGE = "\n최종 게임 결과";
+    public static final String FINAL_SUCCESS_MESSEGE = "게임 성공 여부: 성공";
+    public static final String FINAL_FAIL_MESSEGE = "게임 성공 여부: 실패";
+    public static final String TOTAL_TRY_NUMBER_MESSEGE = "총 시도한 횟수: ";
 
-    /**
-     * 현재까지 이동한 다리의 상태를 정해진 형식에 맞춰 출력한다.
-     * <p>
-     * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
-     */
-    public static String printMap(List<String> downBlock, List<String> upBlock){
-        String upstr = upBlock.stream()
-                .collect(Collectors.joining());
-        String downstr = downBlock.stream()
-                .collect(Collectors.joining());
-
-        String UpSide = upstr.replace("D"," ");
-        UpSide = UpSide.replace("","|");
-        UpSide = UpSide.replace("U","O");
-
-        String DownSide = downstr.replace("U"," ");
-        DownSide = DownSide.replace("","|");
-        DownSide = DownSide.replace("D","O");
-
-        String A = "["+UpSide.substring(1,UpSide.length()-1)+"]";
-        String B = "["+DownSide.substring(1,DownSide.length()-1)+"]";
-
-        return A+"\n"+B;
+    public static void printStartMessege() {
+        System.out.println(START_MESSEGE);
     }
 
-    /**
-     * 게임의 최종 결과를 정해진 형식에 맞춰 출력한다.
-     * <p>
-     * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
-     */
-    public void printResult() {
+    public static void printMap(List<List<String>> result) {
+        String upstr = result.get(0).stream()
+                .collect(Collectors.joining());
+        String downstr = result.get(1).stream()
+                .collect(Collectors.joining());
+
+        String UpSide = upstr.replace(DOWN_INITIAL, BLANK);
+        UpSide = UpSide.replace(NONVALUE, PARTITION);
+        UpSide = UpSide.replace(UP_INITIAL, RIGHT_SIGN);
+        UpSide = UpSide.replace(NONVALUE, BLANK);
+
+
+        String DownSide = downstr.replace(UP_INITIAL, BLANK);
+        DownSide = DownSide.replace(NONVALUE, PARTITION);
+        DownSide = DownSide.replace(DOWN_INITIAL, RIGHT_SIGN);
+        DownSide = DownSide.replace(NONVALUE, BLANK);
+
+
+        String A = OPEN + UpSide.substring(BEGIN_INDEX, UpSide.length() - BEGIN_INDEX) + CLOSE;
+        String B = OPEN + DownSide.substring(BEGIN_INDEX, DownSide.length() - BEGIN_INDEX) + CLOSE;
+
+        System.out.println(A + "\n" + B);
+    }
+
+    public static void printResult(List<List<String>> result, boolean success, int tryNumber) {
+        System.out.println(FINAL_RESULT_MESSEGE);
+        printMap(result);
+        if (success) {
+            System.out.println(FINAL_SUCCESS_MESSEGE);
+        }
+        if (!success) {
+            System.out.println(FINAL_FAIL_MESSEGE);
+        }
+        System.out.println(TOTAL_TRY_NUMBER_MESSEGE + tryNumber);
     }
 }
