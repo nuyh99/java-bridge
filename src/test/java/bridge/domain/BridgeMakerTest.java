@@ -33,8 +33,8 @@ public class BridgeMakerTest {
     @Test
     void makeBridgeTest2() {
         //given
-        BridgeNumberGenerator bridgeNumberGenerator1 = new BridgeTestNumberGenerator(0);
-        BridgeNumberGenerator bridgeNumberGenerator2 = new BridgeTestNumberGenerator(1);
+        BridgeNumberGenerator bridgeNumberGenerator1 = new BridgeTestNumberGenerator(Arrays.asList(1,0,1));
+        BridgeNumberGenerator bridgeNumberGenerator2 = new BridgeTestNumberGenerator(Arrays.asList(0,1,0));
 
         //when
         BridgeMaker BridgeMaker1 = new BridgeMaker(bridgeNumberGenerator1);
@@ -43,9 +43,9 @@ public class BridgeMakerTest {
         //then
             assertAll(
                 ()-> assertThat(BridgeMaker1.makeBridge(3))
-                        .isEqualTo(Arrays.asList("D","D","D")),
+                        .isEqualTo(Arrays.asList("U","D","U")),
                 ()-> assertThat(BridgeMaker2.makeBridge(3))
-                        .isEqualTo(Arrays.asList("U","U","U"))
+                        .isEqualTo(Arrays.asList("D","U","D"))
         );
     }
 }
