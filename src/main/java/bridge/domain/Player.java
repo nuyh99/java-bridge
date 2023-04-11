@@ -5,7 +5,8 @@ import java.util.List;
 
 public class Player {
     public static final String MOVABLE = "UD";
-    private List<String> record = new ArrayList<>();
+
+    private List<String> records = new ArrayList<>();
     int tryNumber;
 
     public Player() {
@@ -16,7 +17,7 @@ public class Player {
         if (!MOVABLE.contains(moving)) {
             throw new IllegalArgumentException("[ERROR]");
         }
-        this.record.add(moving);
+        this.records.add(moving);
     }
 
     public void updateTryNumber() {
@@ -24,7 +25,7 @@ public class Player {
     }
 
     public void resetRecord() {
-        this.record = new ArrayList<>();
+        this.records = new ArrayList<>();
     }
 
     public int getTryNumber() {
@@ -32,6 +33,6 @@ public class Player {
     }
 
     public List<String> getRecord() {
-        return this.record;
+        return this.records;
     }
 }

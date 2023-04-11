@@ -15,7 +15,7 @@ public class BridgeTest {
     @Test
     void makeBridgeTest2() {
         //given
-        Bridge bridge = new Bridge(3);
+        Bridge bridge = new Bridge();
 
         //when
         bridge.build(Arrays.asList("D","U","D"));

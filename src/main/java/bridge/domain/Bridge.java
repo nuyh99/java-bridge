@@ -4,20 +4,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Bridge {
-    private List<String> structure;
-    private int size;
+    private List<String> structures;
 
-    public Bridge(int size) {
-        this.size = size;
+    public Bridge() {
     }
 
     public void build(List<String> structure) {
-        this.structure = structure;
+        this.structures = structure;
     }
 
     public boolean isCorrect(int stage, String predict) {
-        int index = stage - 1;
-        return structure.get(index).equals(predict);
+        int latest = stage - 1;
+        return structures.get(latest).equals(predict);
     }
 }
 
