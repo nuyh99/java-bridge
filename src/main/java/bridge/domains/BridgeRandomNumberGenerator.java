@@ -1,5 +1,6 @@
-package bridge;
+package bridge.domains;
 
+import bridge.domains.BridgeNumberGenerator;
 import camp.nextstep.edu.missionutils.Randoms;
 
 public class BridgeRandomNumberGenerator implements BridgeNumberGenerator {
