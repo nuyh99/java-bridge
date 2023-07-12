@@ -11,8 +11,8 @@ import static bridge.domains.BridgeMap.*;
  */
 final public class BridgeMaker {
 
-    public static final int BRIDGE_LOWER_LENGTH = 3;
-    public static final int BRIDGE_UPPER_LENGTH = 20;
+    private static final int BRIDGE_LOWER_LENGTH = 3;
+    private static final int BRIDGE_UPPER_LENGTH = 20;
     private final BridgeNumberGenerator bridgeNumberGenerator;
 
     public BridgeMaker(BridgeNumberGenerator bridgeNumberGenerator) {
@@ -26,7 +26,7 @@ final public class BridgeMaker {
     public List<String> makeBridge(int size) {
         try {
             validateSize(size);
-        }catch(IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             return null;
         }
@@ -36,13 +36,15 @@ final public class BridgeMaker {
                 .collect(Collectors.toList());
     }
 
-    private void validateSize(int size){
-        if(!(BRIDGE_LOWER_LENGTH <= size && size <= BRIDGE_UPPER_LENGTH)){
+    private void validateSize(int size) {
+        if (!(BRIDGE_LOWER_LENGTH <= size && size <= BRIDGE_UPPER_LENGTH)) {
             throw new IllegalArgumentException("[ERROR] 다리 길이는 3 이상 20이하만 가능합니다.");
         }
     }
-    private String getBridgeKeyword(int e){
-        if(e == 1) return UP_SIDE;
+
+    private String getBridgeKeyword(int e) {
+        if (e == 1) return UP_SIDE;
         return DOWN_SIDE;
     }
+}
 
