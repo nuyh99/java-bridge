@@ -5,7 +5,6 @@ package bridge.domains;
  */
 final public class BridgeGame {
     private final BridgeMap bridgeMap;
-
     private static int gameTryCount;
 
     static {
@@ -22,8 +21,8 @@ final public class BridgeGame {
 
      */
 
-    public void move(String direction) {
-
+    public boolean move(String direction) {
+        return bridgeMap.isCorrectWay(direction);
     }
 
     /**
@@ -33,6 +32,7 @@ final public class BridgeGame {
      */
     public void retry() {
         gameTryCount++;
+        bridgeMap.reset();
     }
 
     public void quit() {
