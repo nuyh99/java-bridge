@@ -16,17 +16,12 @@ final public class BridgeMaker {
     private static final int BRIDGE_UPPER_LENGTH = 20;
     private final BridgeNumberGenerator bridgeNumberGenerator;
 
-    public BridgeMaker(BridgeNumberGenerator bridgeNumberGenerator) {
-        this.bridgeNumberGenerator = bridgeNumberGenerator;
+    public BridgeMaker() {
+        bridgeNumberGenerator = new BridgeRandomNumberGenerator();
     }
 
     public List<String> makeBridge(int size) {
-        try {
-            validateSize(size);
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-            return null;
-        }
+        validateSize(size);
         return Stream.generate(bridgeNumberGenerator::generate)
                 .limit(size)
                 .map(this::getBridgeKeyword)
