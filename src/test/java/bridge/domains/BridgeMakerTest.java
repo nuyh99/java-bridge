@@ -6,17 +6,21 @@ import org.junit.jupiter.api.Test;
 
 class BridgeMakerTest {
 
-    @DisplayName("다리 크기가 3미만이면 NULL을 반환한다")
+    @DisplayName("다리 크기가 3미만이면 예외를 발생시킨다.")
     @Test
-    void makeBridgeToLowerBound() {
-        Assertions.assertThat(new BridgeMaker(new BridgeRandomNumberGenerator())
-                .makeBridge(2)).isEqualTo(null);
+    void validateBridgeToLowerBound() {
+        Assertions.assertThatThrownBy(() ->
+                        new BridgeMaker(new BridgeRandomNumberGenerator())
+                                .makeBridge(2))
+                .isInstanceOf(IllegalArgumentException.class);
     }
 
-    @DisplayName("다리 크기가 20초과면 NULL을 반환한다.")
+    @DisplayName("다리 크기가 20초과면 예외를 발생시킨다.")
     @Test
-    void makeBridgeToUpperBound() {
-        Assertions.assertThat(new BridgeMaker(new BridgeRandomNumberGenerator())
-                .makeBridge(21)).isEqualTo(null);
+    void validateBridgeToUpperBound() {
+        Assertions.assertThatThrownBy(() ->
+                        new BridgeMaker(new BridgeRandomNumberGenerator())
+                                .makeBridge(21))
+                .isInstanceOf(IllegalArgumentException.class);
     }
 }
