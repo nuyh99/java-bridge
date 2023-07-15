@@ -3,6 +3,7 @@ package bridge;
 import bridge.domains.BridgeGame;
 import bridge.domains.BridgeMaker;
 import bridge.domains.BridgeMap;
+import bridge.domains.BridgeRandomNumberGenerator;
 import bridge.views.InputView;
 import bridge.views.OutputView;
 
@@ -19,15 +20,15 @@ final public class Controller {
     }
 
     private BridgeMap createBridge() {
-        BridgeMap bridgeMap = null;
         try {
             int readSize = inputView.readBridgeSize();
-            bridgeMap = new BridgeMap(new BridgeMaker(), readSize);
+            return new BridgeMap(new BridgeMaker(new BridgeRandomNumberGenerator()), readSize);
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             createBridge();
         }
-        return bridgeMap;
+
+        return null;
     }
 
     private void startGame() {
