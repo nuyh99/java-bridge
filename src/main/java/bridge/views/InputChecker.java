@@ -1,5 +1,7 @@
 package bridge.views;
 
+import java.util.List;
+
 public class InputChecker {
 
     private static final int SIZE_LOWER_BOUND = 3;
@@ -14,8 +16,12 @@ public class InputChecker {
         }
     }
 
-
-//    static void validateDirection(String readDirection){
-//        if()
-//    }
+    static void validateCommand(List<String> commands, String readDirection) {
+        int matchSize = (int) commands.stream()
+                .filter(e -> e.contains(readDirection))
+                .count();
+        if (matchSize == 0) {
+            throw new IllegalArgumentException("[ERROR] 올바르지 않은 입력입니다.");
+        }
+    }
 }
