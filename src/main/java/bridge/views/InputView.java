@@ -2,14 +2,20 @@ package bridge.views;
 
 import camp.nextstep.edu.missionutils.Console;
 
+import java.util.List;
+
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
  */
-public class InputView {
 
-    /**
-     * 다리의 길이를 입력받는다.
-     */
+
+final public class InputView {
+
+    private static final String UP_COMMAND = "U";
+    private static final String DOWN_COMMAND = "D";
+    private static final String QUIT_COMMAND = "Q";
+    private static final String RESTART_COMMAND = "R";
+
     private final OutputView outputView;
 
     public InputView() {
@@ -25,19 +31,17 @@ public class InputView {
         return Integer.parseInt(readBridgeSize);
     }
 
-    /**
-     * 사용자가 이동할 칸을 입력받는다.
-     */
     public String readMoving() {
         outputView.printInputMoveDirection();
         String readDirection = Console.readLine();
-        return null;
+        InputChecker.validateKeyword(List.of(UP_COMMAND, DOWN_COMMAND), readDirection);
+        return readDirection;
     }
 
-    /**
-     * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
-     */
     public String readGameCommand() {
-        return null;
+        outputView.printRestartQuestion();
+        String readCommand = Console.readLine();
+        InputChecker.validateKeyword(List.of(QUIT_COMMAND, RESTART_COMMAND), readCommand);
+        return readCommand;
     }
 }
