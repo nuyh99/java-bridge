@@ -16,7 +16,7 @@ final public class Controller {
         inputView = new InputView();
         outputView = new OutputView();
         this.bridgeMap = createBridge();
-        startGame();
+        play();
     }
 
     private BridgeMap createBridge() {
@@ -27,11 +27,10 @@ final public class Controller {
             System.out.println(e.getMessage());
             createBridge();
         }
-
         return null;
     }
 
-    private void startGame() {
+    private void play() {
         BridgeGame bridgeGame = new BridgeGame(bridgeMap);
     }
 }

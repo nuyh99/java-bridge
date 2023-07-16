@@ -34,14 +34,14 @@ final public class InputView {
     public String readMoving() {
         outputView.printInputMoveDirection();
         String readDirection = Console.readLine();
-        InputChecker.validateKeyword(List.of(UP_COMMAND, DOWN_COMMAND), readDirection);
+        InputChecker.validateCommand(List.of(UP_COMMAND, DOWN_COMMAND), readDirection);
         return readDirection;
     }
 
     public String readGameCommand() {
         outputView.printRestartQuestion();
         String readCommand = Console.readLine();
-        InputChecker.validateKeyword(List.of(QUIT_COMMAND, RESTART_COMMAND), readCommand);
+        InputChecker.validateCommand(List.of(QUIT_COMMAND, RESTART_COMMAND), readCommand);
         return readCommand;
     }
 }
