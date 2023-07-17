@@ -2,7 +2,7 @@ package bridge.views;
 
 import java.util.List;
 
-public class InputChecker {
+public final class InputChecker {
 
     private static final int SIZE_LOWER_BOUND = 3;
     private static final int SIZE_UPPER_BOUND = 20;

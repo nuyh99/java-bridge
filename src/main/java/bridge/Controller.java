@@ -7,7 +7,9 @@ import bridge.domains.BridgeRandomNumberGenerator;
 import bridge.views.InputView;
 import bridge.views.OutputView;
 
-final public class Controller {
+import java.util.List;
+
+public final class Controller {
     private final InputView inputView;
     private final OutputView outputView;
     private final BridgeMap bridgeMap;

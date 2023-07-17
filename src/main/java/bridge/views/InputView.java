@@ -9,7 +9,7 @@ import java.util.List;
  */
 
 
-final public class InputView {
+public final class InputView {
 
     private static final String UP_COMMAND = "U";
     private static final String DOWN_COMMAND = "D";

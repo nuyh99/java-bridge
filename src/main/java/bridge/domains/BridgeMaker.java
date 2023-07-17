@@ -10,7 +10,7 @@ import static bridge.domains.BridgeMap.UP_SIDE;
 /**
  * 다리의 길이를 입력 받아서 다리를 생성해주는 역할을 한다.
  */
-final public class BridgeMaker {
+public final class BridgeMaker {
 
     private static final int BRIDGE_LOWER_LENGTH = 3;
     private static final int BRIDGE_UPPER_LENGTH = 20;

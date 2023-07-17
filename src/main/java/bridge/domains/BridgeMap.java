@@ -3,7 +3,7 @@ package bridge.domains;
 import java.util.ArrayList;
 import java.util.List;
 
-final public class BridgeMap {
+public final class BridgeMap {
     public final static String UP_SIDE = "U";
     public final static String DOWN_SIDE = "D";
 
