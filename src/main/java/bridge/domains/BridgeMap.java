@@ -16,11 +16,9 @@ public final class BridgeMap {
         moveHistory = new ArrayList<>();
     }
 
-    public boolean isCorrectWay(String direction) {
+    boolean isCorrectWay(String direction) {
         int nextPosition = moveHistory.size();
-
-        recordMoveHistory(direction);
-
+        moveHistory.add(direction);
         return map.get(nextPosition).equals(direction);
     }
 
