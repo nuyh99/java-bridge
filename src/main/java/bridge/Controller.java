@@ -26,15 +26,17 @@ public final class Controller {
         finishGame(bridgeService.checkBridge());
     }
 
-    private BridgeMap createBridge() {
+    private BridgeMap makeBridge() {
+        BridgeMap bridgeMap;
+        int readSize = inputView.readBridgeSize();
+
         try {
-            int readSize = inputView.readBridgeSize();
-            return new BridgeMap(new BridgeMaker(new BridgeRandomNumberGenerator()), readSize);
+            bridgeMap = new BridgeMap(new BridgeMaker(new BridgeRandomNumberGenerator()), readSize);
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
-            createBridge();
+            bridgeMap = makeBridge();
         }
-        return null;
+        return bridgeMap;
     }
 
     private void play() {
