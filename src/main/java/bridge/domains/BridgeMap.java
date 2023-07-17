@@ -33,4 +33,8 @@ public final class BridgeMap {
     public void reset() {
         moveHistory.clear();
     }
+
+    public List<String> getMoveHistory() {
+        return moveHistory;
+    }
 }

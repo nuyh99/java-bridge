@@ -23,7 +23,11 @@ public final class BridgeGame {
         bridgeMap.reset();
     }
 
-    public void quit() {
+    public int getGameTryCount() {
+        return gameTryCount;
+    }
 
+    public boolean isGameSuccess() {
+        return gameSuccess;
     }
 }
