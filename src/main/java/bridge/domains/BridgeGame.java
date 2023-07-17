@@ -20,7 +20,6 @@ public final class BridgeGame {
 
     public void retry(String readCommand) {
         gameTryCount++;
-        bridgeMap.reset();
     }
 
     public int getGameTryCount() {
