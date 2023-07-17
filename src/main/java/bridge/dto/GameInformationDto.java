@@ -13,7 +13,6 @@ public class GameInformationDto {
     public GameInformationDto(BridgeMap bridgeMap, BridgeGame bridgeGame) {
         this.bridgeMap = bridgeMap;
         this.bridgeGame = bridgeGame;
-
     }
 
     public List<String> getMoveHistory() {

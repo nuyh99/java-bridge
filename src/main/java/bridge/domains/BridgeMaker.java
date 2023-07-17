@@ -14,6 +14,7 @@ public final class BridgeMaker {
 
     private static final int BRIDGE_LOWER_LENGTH = 3;
     private static final int BRIDGE_UPPER_LENGTH = 20;
+
     private final BridgeNumberGenerator bridgeNumberGenerator;
 
     public BridgeMaker(BridgeNumberGenerator bridgeNumberGenerator) {
