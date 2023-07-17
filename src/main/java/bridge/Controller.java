@@ -33,6 +33,32 @@ public final class Controller {
     }
 
     private void play() {
-        BridgeGame bridgeGame = new BridgeGame(bridgeMap);
+        GameInformationDto bridgeMapDto = bridgeService.checkBridge();
+        boolean isSuccess;
+        do {
+            isSuccess = bridgeService.step(inputView.readMoving());
+            outputView.printMap(bridgeMapDto.getMoveHistory(), isSuccess);
+        } while (isSuccess && !bridgeService.isClear());
+
+        questionRestart(bridgeMapDto);
+    }
+
+    private void questionRestart(GameInformationDto gameInformationDto) {
+        if (gameInformationDto.isSuccess()) return;
+
+        String readCommand = inputView.readGameCommand();
+
+        if (readCommand.equals(InputView.RESTART_COMMAND)) {
+            bridgeService.restartGame(readCommand);
+            play();
+            return;
+        }
+    }
+
+    private void finishGame(GameInformationDto gameInformationDto) {
+        boolean isSuccess = gameInformationDto.isSuccess();
+        List<String> moveHistory = gameInformationDto.getMoveHistory();
+        outputView.printResult(moveHistory, isSuccess);
+        outputView.printGameInformation(isSuccess, gameInformationDto.getGameTryCount());
     }
 }
