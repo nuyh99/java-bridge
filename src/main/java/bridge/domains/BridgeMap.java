@@ -24,8 +24,10 @@ public final class BridgeMap {
         return map.get(nextPosition).equals(direction);
     }
 
-    private void recordMoveHistory(String direction) {
-        moveHistory.add(direction);
+    public boolean isFinishBridge() {
+        return BridgeGame.gameSuccess =
+                (moveHistory.size() == map.size()) &&
+                        (moveHistory.toString().equals(map.toString()));
     }
 
     public void reset() {

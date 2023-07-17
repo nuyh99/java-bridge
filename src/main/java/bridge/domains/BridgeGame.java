@@ -3,6 +3,7 @@ package bridge.domains;
 public final class BridgeGame {
     private final BridgeMap bridgeMap;
     private static int gameTryCount;
+    static boolean gameSuccess;
 
     static {
         gameTryCount = 1;
@@ -10,6 +11,7 @@ public final class BridgeGame {
 
     public BridgeGame(BridgeMap bridgeMap) {
         this.bridgeMap = bridgeMap;
+        gameSuccess = false;
     }
 
     public boolean move(String direction) {
