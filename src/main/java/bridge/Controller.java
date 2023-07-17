@@ -4,6 +4,8 @@ import bridge.domains.BridgeGame;
 import bridge.domains.BridgeMaker;
 import bridge.domains.BridgeMap;
 import bridge.domains.BridgeRandomNumberGenerator;
+import bridge.dto.GameInformationDto;
+import bridge.services.BridgeService;
 import bridge.views.InputView;
 import bridge.views.OutputView;
 
@@ -12,13 +14,16 @@ import java.util.List;
 public final class Controller {
     private final InputView inputView;
     private final OutputView outputView;
-    private final BridgeMap bridgeMap;
+    private final BridgeService bridgeService;
 
     public Controller() {
         inputView = new InputView();
         outputView = new OutputView();
-        this.bridgeMap = createBridge();
+
+        BridgeMap bridgeMap = makeBridge();
+        bridgeService = new BridgeService(bridgeMap, new BridgeGame(bridgeMap));
         play();
+        finishGame(bridgeService.checkBridge());
     }
 
     private BridgeMap createBridge() {
