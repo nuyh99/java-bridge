@@ -54,7 +54,6 @@ public final class OutputView {
     }
 
     private void convertLastWord(List<String> printWords, int length, boolean isSuccess) {
-        System.out.println(isSuccess);
         if (!isSuccess && printWords.get(length).equals("O")) {
             printWords.remove(length);
             printWords.add("X");
