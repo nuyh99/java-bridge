@@ -57,14 +57,14 @@ public final class OutputView {
                 .map((e) -> getPrintWord(keyWord, e))
                 .collect(Collectors.toList());
 
-        convertLastWord(printWords, moveHistory.size() - 1, isSuccess);
+        convertLastWord(printWords, isSuccess);
         return String.join(BRIDGE_DELIMITER, printWords);
     }
 
-    private void convertLastWord(List<String> printWords, int length, boolean isSuccess) {
-        if (!isSuccess && printWords.get(length).equals(SUCCESS_SIGN)) {
-            printWords.remove(length);
-            printWords.add(FAIL_SIGN);
+    private void convertLastWord(List<String> printWords, boolean isSuccess) {
+        int lastIndex = printWords.size() - 1;
+        if (!isSuccess && printWords.get(lastIndex).equals(SUCCESS_SIGN)) {
+            printWords.set(lastIndex, FAIL_SIGN);
         }
     }
 
