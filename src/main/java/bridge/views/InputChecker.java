@@ -20,7 +20,7 @@ public final class InputChecker {
                 .filter(e -> e.contains(readDirection))
                 .count();
         if (matchSize == 0) {
-            throw new IllegalArgumentException("[ERROR] 올바르지 않은 입력입니다.");
+            throw new IllegalArgumentException("[ERROR] 올바르지 않은 입력입니다.\n" + commands + " 중 하나를 입력해주세요.");
         }
     }
 }
