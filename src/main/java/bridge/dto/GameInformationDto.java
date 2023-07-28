@@ -5,7 +5,7 @@ import bridge.domain.BridgeMap;
 
 import java.util.List;
 
-public class GameInformationDto {
+public final class GameInformationDto {
 
     private final BridgeMap bridgeMap;
     private final BridgeGame bridgeGame;
