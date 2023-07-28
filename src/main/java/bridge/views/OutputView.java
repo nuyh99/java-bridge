@@ -7,6 +7,14 @@ import static bridge.views.InputView.DOWN_COMMAND;
 import static bridge.views.InputView.UP_COMMAND;
 
 public final class OutputView {
+
+    private static final String SUCCESS_SIGN = "O";
+    private static final String FAIL_SIGN = "X";
+    private static final String BRIDGE_DELIMITER = " | ";
+    private static final String RESULT_START_TAG = "[ ";
+    private static final String RESULT_END_TAG = " ]";
+    private static final String EMPTY_SIGN = " ";
+
     static {
         System.out.println("다리 건너기 게임을 시작합니다\n");
     }
@@ -20,7 +28,7 @@ public final class OutputView {
     }
 
     void printRestartQuestion() {
-        System.out.println("게임을 다시 시도할지 여부를 입력해주세요.");
+        System.out.println("게임을 다시 시도할지 리여부를 입력해주세요.");
     }
 
     public void printMap(List<String> moveHistory, boolean isSuccess) {
@@ -38,8 +46,8 @@ public final class OutputView {
 
     private String trimmedResult(String result) {
         StringBuilder trimmedPrint = new StringBuilder(result);
-        trimmedPrint.replace(0, 0, "[ ");
-        trimmedPrint.append(" ]");
+        trimmedPrint.replace(0, 0, RESULT_START_TAG);
+        trimmedPrint.append(RESULT_END_TAG);
 
         return trimmedPrint.toString();
     }
@@ -50,21 +58,21 @@ public final class OutputView {
                 .collect(Collectors.toList());
 
         convertLastWord(printWords, moveHistory.size() - 1, isSuccess);
-        return String.join(" | ", printWords);
+        return String.join(BRIDGE_DELIMITER, printWords);
     }
 
     private void convertLastWord(List<String> printWords, int length, boolean isSuccess) {
-        if (!isSuccess && printWords.get(length).equals("O")) {
+        if (!isSuccess && printWords.get(length).equals(SUCCESS_SIGN)) {
             printWords.remove(length);
-            printWords.add("X");
+            printWords.add(FAIL_SIGN);
         }
     }
 
     private String getPrintWord(String keyWord, String e) {
         if (keyWord.equals(e)) {
-            return "O";
+            return SUCCESS_SIGN;
         }
-        return " ";
+        return EMPTY_SIGN;
     }
 
     public void printResult(List<String> moveHistory, boolean isSuccess) {
