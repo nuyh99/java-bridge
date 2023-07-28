@@ -33,7 +33,7 @@ public final class Controller {
         try {
             bridgeMap = new BridgeMap(new BridgeMaker(new BridgeRandomNumberGenerator()), readSize);
         } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
+            outputView.printErrorMessage(e.getMessage());
             bridgeMap = makeBridge();
         }
         return bridgeMap;
