@@ -16,9 +16,9 @@ public final class Controller {
     private final OutputView outputView;
     private final BridgeService bridgeService;
 
-    public Controller() {
-        inputView = new InputView();
-        outputView = new OutputView();
+    public Controller(InputView inputView, OutputView outputView) {
+        this.inputView = inputView;
+        this.outputView = outputView;
 
         BridgeMap bridgeMap = makeBridge();
         bridgeService = new BridgeService(bridgeMap, new BridgeGame(bridgeMap));
@@ -33,7 +33,7 @@ public final class Controller {
         try {
             bridgeMap = new BridgeMap(new BridgeMaker(new BridgeRandomNumberGenerator()), readSize);
         } catch (IllegalArgumentException e) {
-            outputView.printErrorMessage(e.getMessage());
+            outputView.printErrorMessage(e);
             bridgeMap = makeBridge();
         }
         return bridgeMap;
