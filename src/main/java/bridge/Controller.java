@@ -56,12 +56,6 @@ public final class Controller {
         }
 
         String readCommand = inputView.readGameCommand();
-
-        if (readCommand.equals(InputView.RESTART_COMMAND)) {
-            bridgeService.restartGame(readCommand);
-            play();
-            return;
-        }
     }
 
     private void finishGame(GameInformationDto gameInformationDto) {
