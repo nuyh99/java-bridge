@@ -1,7 +1,7 @@
-package bridge.services;
+package bridge.service;
 
-import bridge.domains.BridgeGame;
-import bridge.domains.BridgeMap;
+import bridge.domain.BridgeGame;
+import bridge.domain.BridgeMap;
 import bridge.dto.GameInformationDto;
 
 public final class BridgeService {

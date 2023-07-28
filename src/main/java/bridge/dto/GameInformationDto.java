@@ -1,7 +1,7 @@
 package bridge.dto;
 
-import bridge.domains.BridgeGame;
-import bridge.domains.BridgeMap;
+import bridge.domain.BridgeGame;
+import bridge.domain.BridgeMap;
 
 import java.util.List;
 
@@ -15,8 +15,8 @@ public class GameInformationDto {
         this.bridgeGame = bridgeGame;
     }
 
-    public List<String> getMoveHistory() {
-        return bridgeMap.getMoveHistory();
+    public List<String> getMoveLogs() {
+        return bridgeMap.getMoveLogs();
     }
 
     public int getGameTryCount() {

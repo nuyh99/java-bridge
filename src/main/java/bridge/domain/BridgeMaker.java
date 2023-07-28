@@ -1,11 +1,11 @@
-package bridge.domains;
+package bridge.domain;
 
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import static bridge.domains.BridgeMap.DOWN_SIDE;
-import static bridge.domains.BridgeMap.UP_SIDE;
+import static bridge.domain.BridgeMap.DOWN_SIDE;
+import static bridge.domain.BridgeMap.UP_SIDE;
 
 /**
  * 다리의 길이를 입력 받아서 다리를 생성해주는 역할을 한다.

@@ -1,4 +1,4 @@
-package bridge.domains;
+package bridge.domain;
 
 public final class BridgeGame {
     private final BridgeMap bridgeMap;

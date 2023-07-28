@@ -1,4 +1,4 @@
-package bridge.views;
+package bridge.view;
 
 import camp.nextstep.edu.missionutils.Console;
 

@@ -1,4 +1,4 @@
-package bridge.domains;
+package bridge.domain;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,31 +8,31 @@ public final class BridgeMap {
     public final static String DOWN_SIDE = "D";
 
     private final List<String> map;
-    private final List<String> moveHistory;
+    private final List<String> moveLogs;
 
     public BridgeMap(BridgeMaker bridgeMaker, int size) {
 
         map = bridgeMaker.makeBridge(size);
-        moveHistory = new ArrayList<>();
+        moveLogs = new ArrayList<>();
     }
 
     boolean isCorrectWay(String direction) {
-        int nextPosition = moveHistory.size();
-        moveHistory.add(direction);
+        int nextPosition = moveLogs.size();
+        moveLogs.add(direction);
         return map.get(nextPosition).equals(direction);
     }
 
     public boolean isFinishBridge() {
         return BridgeGame.gameSuccess =
-                (moveHistory.size() == map.size()) &&
-                        (moveHistory.toString().equals(map.toString()));
+                (moveLogs.size() == map.size()) &&
+                        (moveLogs.toString().equals(map.toString()));
     }
 
     public void reset() {
-        moveHistory.clear();
+        moveLogs.clear();
     }
 
-    public List<String> getMoveHistory() {
-        return moveHistory;
+    public List<String> getMoveLogs() {
+        return moveLogs;
     }
 }

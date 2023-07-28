@@ -1,13 +1,13 @@
 package bridge;
 
-import bridge.domains.BridgeGame;
-import bridge.domains.BridgeMaker;
-import bridge.domains.BridgeMap;
-import bridge.domains.BridgeRandomNumberGenerator;
+import bridge.domain.BridgeGame;
+import bridge.domain.BridgeMaker;
+import bridge.domain.BridgeMap;
+import bridge.domain.BridgeRandomNumberGenerator;
 import bridge.dto.GameInformationDto;
-import bridge.services.BridgeService;
-import bridge.views.InputView;
-import bridge.views.OutputView;
+import bridge.service.BridgeService;
+import bridge.view.InputView;
+import bridge.view.OutputView;
 
 import java.util.List;
 
@@ -44,7 +44,7 @@ public final class Controller {
         boolean isSuccess;
         do {
             isSuccess = bridgeService.step(inputView.readMoving());
-            outputView.printMap(bridgeMapDto.getMoveHistory(), isSuccess);
+            outputView.printMap(bridgeMapDto.getMoveLogs(), isSuccess);
         } while (isSuccess && !bridgeService.isClear());
 
         questionRestart(bridgeMapDto);
@@ -66,8 +66,8 @@ public final class Controller {
 
     private void finishGame(GameInformationDto gameInformationDto) {
         boolean isSuccess = gameInformationDto.isSuccess();
-        List<String> moveHistory = gameInformationDto.getMoveHistory();
-        outputView.printResult(moveHistory, isSuccess);
+        List<String> moveLogs = gameInformationDto.getMoveLogs();
+        outputView.printResult(moveLogs, isSuccess);
         outputView.printGameInformation(isSuccess, gameInformationDto.getGameTryCount());
     }
 }

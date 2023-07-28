@@ -1,10 +1,10 @@
-package bridge.views;
+package bridge.view;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static bridge.views.InputView.DOWN_COMMAND;
-import static bridge.views.InputView.UP_COMMAND;
+import static bridge.view.InputView.DOWN_COMMAND;
+import static bridge.view.InputView.UP_COMMAND;
 
 public final class OutputView {
 
@@ -31,15 +31,15 @@ public final class OutputView {
         System.out.println("게임을 다시 시도할지 리여부를 입력해주세요.");
     }
 
-    public void printMap(List<String> moveHistory, boolean isSuccess) {
+    public void printMap(List<String> moveLogs, boolean isSuccess) {
 
-        String result = draw(moveHistory, isSuccess);
+        String result = draw(moveLogs, isSuccess);
         System.out.println(result);
     }
 
-    private String draw(List<String> moveHistory, boolean isSuccess) {
-        String upSideResult = drawSection(UP_COMMAND, moveHistory, isSuccess);
-        String downSideResult = drawSection(DOWN_COMMAND, moveHistory, isSuccess);
+    private String draw(List<String> moveLogs, boolean isSuccess) {
+        String upSideResult = drawSection(UP_COMMAND, moveLogs, isSuccess);
+        String downSideResult = drawSection(DOWN_COMMAND, moveLogs, isSuccess);
 
         return (trimmedResult(upSideResult) + "\n" + trimmedResult(downSideResult));
     }
@@ -52,9 +52,9 @@ public final class OutputView {
         return trimmedPrint.toString();
     }
 
-    private String drawSection(String keyWord, List<String> moveHistory, boolean isSuccess) {
-        List<String> printWords = moveHistory.stream()
-                .map((e) -> getPrintWord(keyWord, e))
+    private String drawSection(String keyWord, List<String> moveLogs, boolean isSuccess) {
+        List<String> printWords = moveLogs.stream()
+                .map((currentLog) -> getPrintWord(keyWord, currentLog))
                 .collect(Collectors.toList());
 
         convertLastWord(printWords, isSuccess);
@@ -68,17 +68,17 @@ public final class OutputView {
         }
     }
 
-    private String getPrintWord(String keyWord, String e) {
-        if (keyWord.equals(e)) {
+    private String getPrintWord(String keyWord, String currentLog) {
+        if (keyWord.equals(currentLog)) {
             return SUCCESS_SIGN;
         }
         return EMPTY_SIGN;
     }
 
-    public void printResult(List<String> moveHistory, boolean isSuccess) {
+    public void printResult(List<String> moveLogs, boolean isSuccess) {
         System.out.println();
         System.out.println("최종 게임 결과");
-        printMap(moveHistory, isSuccess);
+        printMap(moveLogs, isSuccess);
     }
 
     public void printGameInformation(boolean isSuccess, int gameCount) {
