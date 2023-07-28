@@ -93,7 +93,7 @@ public final class OutputView {
         System.out.println("총 시도한 횟수: " + gameCount);
     }
 
-    public void printErrorMessage(String message) {
-        System.out.println(message);
+    public void printErrorMessage(Exception e) {
+        System.out.println(e.getMessage());
     }
 }

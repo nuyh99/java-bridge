@@ -25,7 +25,7 @@ public final class InputView {
             InputChecker.validateNumeric(this, readBridgeSize);
             return Integer.parseInt(readBridgeSize);
         } catch (IllegalArgumentException e) {
-            outputView.printErrorMessage(e.getMessage());
+            outputView.printErrorMessage(e);
             return readBridgeSize();
         }
     }
@@ -38,7 +38,7 @@ public final class InputView {
             InputChecker.validateCommand(List.of(UP_COMMAND, DOWN_COMMAND), readDirection);
             return readDirection;
         } catch (IllegalArgumentException e) {
-            outputView.printErrorMessage(e.getMessage());
+            outputView.printErrorMessage(e);
             return readMoving();
         }
     }
@@ -51,7 +51,7 @@ public final class InputView {
             InputChecker.validateCommand(List.of(QUIT_COMMAND, RESTART_COMMAND), readCommand);
             return readCommand;
         } catch (IllegalArgumentException e) {
-            outputView.printErrorMessage(e.getMessage());
+            outputView.printErrorMessage(e);
             return readGameCommand();
         }
 
