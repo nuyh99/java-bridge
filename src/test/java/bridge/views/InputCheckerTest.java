@@ -48,6 +48,4 @@ public class InputCheckerTest {
                 -> InputChecker.validateCommand(List.of("D", "U"), "A"))
                 .isInstanceOf(IllegalArgumentException.class);
     }
-
-
 }

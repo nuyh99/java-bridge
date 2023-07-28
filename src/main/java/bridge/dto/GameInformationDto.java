@@ -26,6 +26,4 @@ public class GameInformationDto {
     public boolean isSuccess() {
         return bridgeGame.isGameSuccess();
     }
-
-
 }

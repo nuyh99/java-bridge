@@ -51,7 +51,9 @@ public final class Controller {
     }
 
     private void questionRestart(GameInformationDto gameInformationDto) {
-        if (gameInformationDto.isSuccess()) return;
+        if (gameInformationDto.isSuccess()) {
+            return;
+        }
 
         String readCommand = inputView.readGameCommand();
 
