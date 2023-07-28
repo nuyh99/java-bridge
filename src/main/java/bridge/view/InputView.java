@@ -22,7 +22,7 @@ public final class InputView {
         String readBridgeSize = Console.readLine();
 
         try {
-            InputChecker.validateNumeric(this, readBridgeSize);
+            InputChecker.validateNumeric(readBridgeSize);
             return Integer.parseInt(readBridgeSize);
         } catch (IllegalArgumentException e) {
             outputView.printErrorMessage(e);

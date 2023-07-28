@@ -7,7 +7,7 @@ public final class InputChecker {
     private static final int SIZE_LOWER_BOUND = 3;
     private static final int SIZE_UPPER_BOUND = 20;
 
-    static void validateNumeric(InputView inputView, String readSize) {
+    static void validateNumeric(String readSize) {
         try {
             Integer.parseInt(readSize);
         } catch (NumberFormatException e) {

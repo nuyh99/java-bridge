@@ -13,7 +13,7 @@ public class InputCheckerTest {
     @Test
     void validateBridgeSizeByWord() {
         assertThatThrownBy(()
-                -> InputChecker.validateNumeric(new InputView(), "ab"))
+                -> InputChecker.validateNumeric("ab"))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("[ERROR] 숫자만 입력해주세요");
     }
@@ -22,7 +22,7 @@ public class InputCheckerTest {
     @Test
     void validateBridgeSizeByWordAndNumber() {
         assertThatThrownBy(()
-                -> InputChecker.validateNumeric(new InputView(), "a12b"))
+                -> InputChecker.validateNumeric("a12b"))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("[ERROR] 숫자만 입력해주세요");
     }
