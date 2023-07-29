@@ -24,8 +24,7 @@ public final class BridgeMap {
 
     public boolean isFinishBridge() {
         return BridgeGame.gameSuccess =
-                (moveLogs.size() == map.size()) &&
-                        (moveLogs.toString().equals(map.toString()));
+                (moveLogs.size() == map.size()) && (moveLogs.toString().equals(map.toString()));
     }
 
     public void reset() {
