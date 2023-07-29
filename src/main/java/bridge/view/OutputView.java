@@ -28,7 +28,7 @@ public final class OutputView {
     }
 
     void printRestartQuestion() {
-        System.out.println("게임을 다시 시도할지 리여부를 입력해주세요.");
+        System.out.println("게임을 다시 시도할지 여부를 입력해주세요.");
     }
 
     public void printMap(List<String> moveLogs, boolean isSuccess) {
