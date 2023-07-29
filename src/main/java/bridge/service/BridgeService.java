@@ -25,8 +25,8 @@ public final class BridgeService {
         return bridgeMap.isFinishBridge();
     }
 
-    public void restartGame(String command) {
-        bridgeGame.retry(command);
+    public void restartGame() {
+        bridgeGame.retry();
         bridgeMap.reset();
     }
 }

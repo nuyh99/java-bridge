@@ -41,21 +41,32 @@ public final class Controller {
 
     private void play() {
         GameInformationDto bridgeMapDto = bridgeService.checkBridge();
+        boolean isSuccess = doStepBridge(bridgeMapDto);
+
+        if (doRestart(bridgeMapDto)) {
+            bridgeService.restartGame();
+            play();
+            return;
+        }
+    }
+
+    private boolean doStepBridge(GameInformationDto bridgeMapDto) {
         boolean isSuccess;
         do {
             isSuccess = bridgeService.step(inputView.readMoving());
             outputView.printMap(bridgeMapDto.getMoveLogs(), isSuccess);
         } while (isSuccess && !bridgeService.isClear());
 
-        questionRestart(bridgeMapDto);
+        return isSuccess;
     }
 
-    private void questionRestart(GameInformationDto gameInformationDto) {
+    private boolean doRestart(GameInformationDto gameInformationDto) {
         if (gameInformationDto.isSuccess()) {
-            return;
+            return false;
         }
 
         String readCommand = inputView.readGameCommand();
+        return readCommand.equals(InputView.RESTART_COMMAND);
     }
 
     private void finishGame(GameInformationDto gameInformationDto) {

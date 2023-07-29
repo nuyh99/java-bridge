@@ -18,7 +18,7 @@ public final class BridgeGame {
         return bridgeMap.isCorrectWay(direction);
     }
 
-    public void retry(String readCommand) {
+    public void retry() {
         gameTryCount++;
     }
 
