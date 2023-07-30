@@ -2,7 +2,6 @@ package bridge;
 
 import bridge.domain.BridgeGame;
 import bridge.domain.BridgeMaker;
-import bridge.domain.BridgeMap;
 import bridge.domain.BridgeRandomNumberGenerator;
 import bridge.dto.GameInformationDto;
 import bridge.service.BridgeService;
@@ -24,14 +23,16 @@ public final class Controller {
     }
 
     private BridgeService init() {
-        BridgeMap bridgeMap = makeBridge();
-        return new BridgeService(bridgeMap, new BridgeGame(bridgeMap));
+        BridgeGame bridgeGame = makeBridge();
+        return new BridgeService(bridgeGame);
     }
 
-    private BridgeMap makeBridge() {
+    private BridgeGame makeBridge() {
         int readSize = inputView.readBridgeSize();
-        return new BridgeMaker(
+        List<String> map = new BridgeMaker(
                 new BridgeRandomNumberGenerator()).makeBridge(readSize);
+
+        return new BridgeGame(map);
     }
 
     public void play() {

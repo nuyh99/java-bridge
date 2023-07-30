@@ -4,8 +4,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import static bridge.domain.BridgeMap.DOWN_SIDE;
-import static bridge.domain.BridgeMap.UP_SIDE;
+import static bridge.domain.BridgeGame.DOWN_SIDE;
+import static bridge.domain.BridgeGame.UP_SIDE;
 
 public final class BridgeMaker {
 
@@ -18,15 +18,13 @@ public final class BridgeMaker {
         this.bridgeNumberGenerator = bridgeNumberGenerator;
     }
 
-    public BridgeMap makeBridge(int size) {
+    public List<String> makeBridge(int size) {
         validateSize(size);
 
-        List<String> map = Stream.generate(bridgeNumberGenerator::generate)
+        return Stream.generate(bridgeNumberGenerator::generate)
                 .limit(size)
                 .map(this::getBridgeKeyword)
                 .collect(Collectors.toList());
-
-        return new BridgeMap(map);
     }
 
     private void validateSize(int size) {
