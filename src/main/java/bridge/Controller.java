@@ -20,44 +20,38 @@ public final class Controller {
         this.inputView = inputView;
         this.outputView = outputView;
 
+        bridgeService = init();
+    }
+
+    private BridgeService init() {
         BridgeMap bridgeMap = makeBridge();
-        bridgeService = new BridgeService(bridgeMap, new BridgeGame(bridgeMap));
-        play();
-        finishGame(bridgeService.checkBridge());
+        return new BridgeService(bridgeMap, new BridgeGame(bridgeMap));
     }
 
     private BridgeMap makeBridge() {
-        BridgeMap bridgeMap;
         int readSize = inputView.readBridgeSize();
-
-        try {
-            bridgeMap = new BridgeMap(new BridgeMaker(new BridgeRandomNumberGenerator()), readSize);
-        } catch (IllegalArgumentException e) {
-            outputView.printErrorMessage(e);
-            bridgeMap = makeBridge();
-        }
-        return bridgeMap;
+        return new BridgeMaker(
+                new BridgeRandomNumberGenerator()).makeBridge(readSize);
     }
 
-    private void play() {
+    public void play() {
         GameInformationDto bridgeMapDto = bridgeService.checkBridge();
-        boolean isSuccess = doStepBridge(bridgeMapDto);
+        doStepBridge(bridgeMapDto);
 
         if (doRestart(bridgeMapDto)) {
             bridgeService.restartGame();
             play();
             return;
         }
+        finishGame(bridgeMapDto);
     }
 
-    private boolean doStepBridge(GameInformationDto bridgeMapDto) {
+    private void doStepBridge(GameInformationDto bridgeMapDto) {
         boolean isSuccess;
         do {
             isSuccess = bridgeService.step(inputView.readMoving());
             outputView.printMap(bridgeMapDto.getMoveLogs(), isSuccess);
         } while (isSuccess && !bridgeService.isClear());
-
-        return isSuccess;
     }
 
     private boolean doRestart(GameInformationDto gameInformationDto) {
@@ -72,6 +66,7 @@ public final class Controller {
     private void finishGame(GameInformationDto gameInformationDto) {
         boolean isSuccess = gameInformationDto.isSuccess();
         List<String> moveLogs = gameInformationDto.getMoveLogs();
+
         outputView.printResult(moveLogs, isSuccess);
         outputView.printGameInformation(isSuccess, gameInformationDto.getGameTryCount());
     }

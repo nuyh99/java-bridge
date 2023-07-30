@@ -18,13 +18,15 @@ public final class BridgeMaker {
         this.bridgeNumberGenerator = bridgeNumberGenerator;
     }
 
-    public List<String> makeBridge(int size) {
+    public BridgeMap makeBridge(int size) {
         validateSize(size);
 
-        return Stream.generate(bridgeNumberGenerator::generate)
+        List<String> map = Stream.generate(bridgeNumberGenerator::generate)
                 .limit(size)
                 .map(this::getBridgeKeyword)
                 .collect(Collectors.toList());
+
+        return new BridgeMap(map);
     }
 
     private void validateSize(int size) {

@@ -1,9 +1,10 @@
 package bridge.domain;
 
+import java.util.List;
+
 public final class BridgeGame {
     private final BridgeMap bridgeMap;
     private static int gameTryCount;
-    static boolean gameSuccess;
 
     static {
         gameTryCount = 1;
@@ -11,7 +12,6 @@ public final class BridgeGame {
 
     public BridgeGame(BridgeMap bridgeMap) {
         this.bridgeMap = bridgeMap;
-        gameSuccess = false;
     }
 
     public boolean move(String direction) {
@@ -26,7 +26,8 @@ public final class BridgeGame {
         return gameTryCount;
     }
 
-    public boolean isGameSuccess() {
-        return gameSuccess;
+    public boolean isGameSuccess(List<String> map, List<String> moveLogs) {
+        return (moveLogs.size() == map.size())
+                && (moveLogs.toString().equals(map.toString()));
     }
 }

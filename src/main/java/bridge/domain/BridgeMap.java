@@ -7,12 +7,11 @@ public final class BridgeMap {
     public final static String UP_SIDE = "U";
     public final static String DOWN_SIDE = "D";
 
-    private final List<String> map;
     private final List<String> moveLogs;
+    private final List<String> map;
 
-    public BridgeMap(BridgeMaker bridgeMaker, int size) {
-
-        map = bridgeMaker.makeBridge(size);
+    public BridgeMap(List<String> map) {
+        this.map = map;
         moveLogs = new ArrayList<>();
     }
 
@@ -20,11 +19,6 @@ public final class BridgeMap {
         int nextPosition = moveLogs.size();
         moveLogs.add(direction);
         return map.get(nextPosition).equals(direction);
-    }
-
-    public boolean isFinishBridge() {
-        return BridgeGame.gameSuccess =
-                (moveLogs.size() == map.size()) && (moveLogs.toString().equals(map.toString()));
     }
 
     public void reset() {
