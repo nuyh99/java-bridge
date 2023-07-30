@@ -1,20 +1,17 @@
 package bridge.service;
 
 import bridge.domain.BridgeGame;
-import bridge.domain.BridgeMap;
 import bridge.dto.GameInformationDto;
 
 public final class BridgeService {
-    private final BridgeMap bridgeMap;
     private final BridgeGame bridgeGame;
 
-    public BridgeService(BridgeMap bridgeMap, BridgeGame bridgeGame) {
-        this.bridgeMap = bridgeMap;
+    public BridgeService(BridgeGame bridgeGame) {
         this.bridgeGame = bridgeGame;
     }
 
     public GameInformationDto checkBridge() {
-        return new GameInformationDto(bridgeMap, bridgeGame);
+        return new GameInformationDto(bridgeGame);
     }
 
     public boolean step(String direction) {
@@ -22,11 +19,10 @@ public final class BridgeService {
     }
 
     public boolean isClear() {
-        return bridgeMap.isFinishBridge();
+        return bridgeGame.isGameSuccess();
     }
 
     public void restartGame() {
-        bridgeGame.retry();
-        bridgeMap.reset();
+        bridgeGame.reset();
     }
 }

@@ -1,7 +1,6 @@
 package bridge.domain;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public final class BridgeGame {
@@ -42,6 +41,6 @@ public final class BridgeGame {
     }
 
     public List<String> getMoveLogs() {
-        return Collections.unmodifiableList(moveLogs);
+        return moveLogs;
     }
 }

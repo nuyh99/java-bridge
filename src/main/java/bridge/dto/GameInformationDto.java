@@ -2,6 +2,7 @@ package bridge.dto;
 
 import bridge.domain.BridgeGame;
 
+import java.util.Collections;
 import java.util.List;
 
 public final class GameInformationDto {
@@ -13,7 +14,7 @@ public final class GameInformationDto {
     }
 
     public List<String> getMoveLogs() {
-        return bridgeGame.getMoveLogs();
+        return Collections.unmodifiableList(bridgeGame.getMoveLogs());
     }
 
     public int getGameTryCount() {
