@@ -5,8 +5,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 class BridgeGameTest {
     private final List<String> TEST_MAP = List.of("U", "D", "D", "U", "D");
@@ -17,17 +15,18 @@ class BridgeGameTest {
         return bridgeGame;
     }
 
-    @DisplayName("방향에 맞는 결과가 나오면 통과한다.")
+    @DisplayName("더 움직일 수 있다면 true를 반환")
     @Test
-    void testCorrectMoveResult() {
-        BridgeGame bridgeGame = setTest(List.of("U,D"));
+    void testCorrectMove() {
+        BridgeGame bridgeGame = setTest(List.of("U", "D", "U"));
+        Assertions.assertThat(bridgeGame.move("D")).isTrue();
+    }
 
-        List<Boolean> testResult = Stream.generate((()
-                        -> bridgeGame.move("D")))
-                .limit(2)
-                .collect(Collectors.toList());
-
-        Assertions.assertThat(testResult).isEqualTo(List.of(true, false));
+    @DisplayName("더 움직일 수 있다면 true를 반환")
+    @Test
+    void testInCorrectMove() {
+        BridgeGame bridgeGame = setTest(List.of("U", "D", "U", "D", "D"));
+        Assertions.assertThat(bridgeGame.move("D")).isFalse();
     }
 
     @DisplayName("moveLogs와 map과 길이가 다르면 False를 반환")
