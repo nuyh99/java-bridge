@@ -1,9 +1,8 @@
 package bridge;
 
 import bridge.domain.BridgeGame;
-import bridge.domain.BridgeMaker;
-import bridge.domain.BridgeRandomNumberGenerator;
-import bridge.dto.GameInformationDto;
+import bridge.dto.GameDto;
+import bridge.dto.MapDto;
 import bridge.service.BridgeService;
 import bridge.view.InputView;
 import bridge.view.OutputView;
@@ -15,60 +14,72 @@ public final class Controller {
     private final OutputView outputView;
     private final BridgeService bridgeService;
 
-    public Controller(InputView inputView, OutputView outputView) {
+    public Controller(InputView inputView, OutputView outputView, BridgeService bridgeService) {
+
         this.inputView = inputView;
         this.outputView = outputView;
+        this.bridgeService = bridgeService;
 
-        bridgeService = init();
+        init();
     }
 
-    private BridgeService init() {
-        BridgeGame bridgeGame = makeBridge();
-        return new BridgeService(bridgeGame);
-    }
-
-    private BridgeGame makeBridge() {
+    private void init() {
         int readSize = inputView.readBridgeSize();
-        List<String> map = new BridgeMaker(
-                new BridgeRandomNumberGenerator()).makeBridge(readSize);
 
-        return new BridgeGame(map);
+        List<String> map = bridgeService.makeBridgeMap(readSize).getMap();
+        BridgeGame bridgeGame = new BridgeGame(map);
+        run(new GameDto(bridgeGame), new MapDto(bridgeGame));
     }
 
-    public void play() {
-        GameInformationDto bridgeMapDto = bridgeService.checkBridge();
-        doStepBridge(bridgeMapDto);
+    private void run(GameDto gameDto, MapDto mapDto) {
+        play(gameDto, mapDto);
 
-        if (doRestart(bridgeMapDto)) {
-            bridgeService.restartGame();
-            play();
+        if (doRestart(gameDto)) {
+            gameDto = bridgeService.resetGame(gameDto, mapDto);
+            run(gameDto, mapDto);
             return;
         }
-        finishGame(bridgeMapDto);
+        finish(gameDto);
     }
 
-    private void doStepBridge(GameInformationDto bridgeMapDto) {
-        boolean isSuccess;
-        do {
-            isSuccess = bridgeService.step(inputView.readMoving());
-            outputView.printMap(bridgeMapDto.getMoveLogs(), isSuccess);
-        } while (isSuccess && !bridgeService.isClear());
+    private void play(GameDto gameDto, MapDto mapDto) {
+        String readMoving;
+
+        while (canMove(gameDto, mapDto)) {
+            readMoving = inputView.readMoving();
+            gameDto = bridgeService.stepNext(gameDto, mapDto, readMoving);
+
+            outputView.printMap(gameDto.getMoveLogs(), isMatched(gameDto, mapDto));
+        }
     }
 
-    private boolean doRestart(GameInformationDto gameInformationDto) {
-        if (gameInformationDto.isSuccess()) {
+    private boolean canMove(GameDto gameDto, MapDto mapDto) {
+        boolean isMatched = bridgeService.isMatch(mapDto, gameDto);
+        boolean isReached = mapDto.getMap().size() <= gameDto.getMoveLogs().size();
+
+        return (isMatched && !isReached);
+    }
+
+    private boolean isMatched(GameDto gameDto, MapDto mapDto) {
+        List<String> moveLogs = gameDto.getMoveLogs();
+        List<String> map = mapDto.getMap();
+        int lastIndex = moveLogs.size() - 1;
+        return moveLogs.get(lastIndex).equals(map.get(lastIndex));
+    }
+
+    private boolean doRestart(GameDto gameDto) {
+        if (gameDto.isSuccess()) {
             return false;
         }
-
         String readCommand = inputView.readGameCommand();
         return readCommand.equals(InputView.RESTART_COMMAND);
     }
 
-    private void finishGame(GameInformationDto gameInformationDto) {
-        boolean isSuccess = gameInformationDto.isSuccess();
-        List<String> moveLogs = gameInformationDto.getMoveLogs();
+    private void finish(GameDto gameDto) {
+        boolean isSuccess = gameDto.isSuccess();
+        List<String> moveLogs = gameDto.getMoveLogs();
 
         outputView.printResult(moveLogs, isSuccess);
-        outputView.printGameInformation(isSuccess, gameInformationDto.getGameTryCount());
+        outputView.printGameInformation(isSuccess, gameDto.getGameTryCount());
     }
 }
