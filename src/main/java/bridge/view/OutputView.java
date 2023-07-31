@@ -28,7 +28,7 @@ public final class OutputView {
     }
 
     void printRestartQuestion() {
-        System.out.println("게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q");
+        System.out.println("게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)");
     }
 
     public void printMap(List<String> moveLogs, boolean isSuccess) {
@@ -46,6 +46,7 @@ public final class OutputView {
 
     private String trimmedResult(String result) {
         StringBuilder trimmedPrint = new StringBuilder(result);
+
         trimmedPrint.replace(0, 0, RESULT_START_TAG);
         trimmedPrint.append(RESULT_END_TAG);
 
@@ -53,6 +54,7 @@ public final class OutputView {
     }
 
     private String drawSection(String keyWord, List<String> moveLogs, boolean isSuccess) {
+
         List<String> printWords = moveLogs.stream()
                 .map((currentLog) -> getPrintWord(keyWord, currentLog))
                 .collect(Collectors.toList());
@@ -63,12 +65,14 @@ public final class OutputView {
 
     private void convertLastWord(List<String> printWords, boolean isSuccess) {
         int lastIndex = printWords.size() - 1;
+
         if (!isSuccess && printWords.get(lastIndex).equals(SUCCESS_SIGN)) {
             printWords.set(lastIndex, FAIL_SIGN);
         }
     }
 
     private String getPrintWord(String keyWord, String currentLog) {
+
         if (keyWord.equals(currentLog)) {
             return SUCCESS_SIGN;
         }
@@ -88,7 +92,6 @@ public final class OutputView {
         if (isSuccess) {
             gameSuccessText = "성공";
         }
-
         System.out.println("게임 성공 여부: " + gameSuccessText);
         System.out.println("총 시도한 횟수: " + gameCount);
     }
