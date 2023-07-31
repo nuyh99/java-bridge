@@ -22,7 +22,7 @@ public final class InputChecker {
         if (readDirection == null
                 || commands.stream()
                 .noneMatch(e -> e.equals(readDirection))) {
-            throw new IllegalArgumentException("[ERROR] 올바르지 않은 입력입니다.\n" + commands + " 중 하나를 입력해주세요.");
+            throw new IllegalArgumentException("[ERROR] 올바르지 않은 입력입니다. " + commands + " 중 하나를 입력해주세요.");
         }
     }
 }

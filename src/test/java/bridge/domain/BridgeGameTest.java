@@ -30,7 +30,6 @@ class BridgeGameTest {
         Assertions.assertThat(testResult).isEqualTo(List.of(true, false));
     }
 
-
     @DisplayName("moveLogs와 map과 길이가 다르면 False를 반환")
     @Test
     void testWrongLength() {

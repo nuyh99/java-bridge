@@ -8,7 +8,6 @@ import static bridge.domain.BridgeGame.DOWN_SIDE;
 import static bridge.domain.BridgeGame.UP_SIDE;
 
 public final class BridgeMaker {
-
     private static final int BRIDGE_LOWER_LENGTH = 3;
     private static final int BRIDGE_UPPER_LENGTH = 20;
 
