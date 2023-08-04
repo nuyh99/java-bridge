@@ -1,8 +1,12 @@
 package bridge;
 
-public class Application {
+import bridge.service.BridgeService;
+import bridge.view.InputView;
+import bridge.view.OutputView;
+
+public final class Application {
 
     public static void main(String[] args) {
-        // TODO: 프로그램 구현
+        new Controller(new InputView(), new OutputView(), new BridgeService());
     }
 }
